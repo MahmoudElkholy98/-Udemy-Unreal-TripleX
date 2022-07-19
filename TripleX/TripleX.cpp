@@ -1,9 +1,12 @@
 #include <iostream>
+#include <ctime>
 
 void GameIntro(int Level);
 bool GamePlay(int Difficulty);
 
 int main() {
+
+	srand(time(NULL));
 
 	int Level = 1;
 	int Difficulty = 4;
@@ -16,7 +19,7 @@ int main() {
 
 		Level++;
 
-		if (Level % 5 == 0) {
+		if (Level % 3 == 0) {
 			Difficulty++;
 		}
 	}
@@ -33,9 +36,9 @@ void GameIntro(int Level) {
 
 bool GamePlay(int Difficulty) {
 
-	int FirstCode = rand() % Difficulty;
-	int SecondCode = rand() % Difficulty;
-	int ThirdCode = rand() % Difficulty;
+	int FirstCode = rand() % Difficulty + 1;
+	int SecondCode = rand() % Difficulty + 1;
+	int ThirdCode = rand() % Difficulty + 1;
 
 	int CodeSum = FirstCode + SecondCode + ThirdCode;
 	int CodeProduct = FirstCode * SecondCode * ThirdCode;
