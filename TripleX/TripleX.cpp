@@ -1,35 +1,41 @@
 #include <iostream>
 
-void GameIntro(int Diffeculty);
-bool GamePlay();
+void GameIntro(int Level);
+bool GamePlay(int Difficulty);
 
 int main() {
 
-	int LevelDifficulty = 1;
+	int Level = 1;
+	int Difficulty = 4;
+
 	bool IsHacking = true;
 
 	while (IsHacking) {
-		GameIntro(LevelDifficulty);
-		IsHacking = GamePlay();
+		GameIntro(Level);
+		IsHacking = GamePlay(Difficulty);
 
-		LevelDifficulty++;
+		Level++;
+
+		if (Level % 5 == 0) {
+			Difficulty++;
+		}
 	}
 
 	return 0;
 }
 
-void GameIntro(int Diffeculty) {
+void GameIntro(int Level) {
 	std::cout << "\n\n#########################################################################################\n";
-	std::cout << "You are a brilliant detective breaking into a {level " << Diffeculty << "} secure server room" << std::endl;
+	std::cout << "You are a brilliant detective breaking into a {level " << Level << "} secure server room" << std::endl;
 	std::cout << "Enter the correctto code to continue...\n";	
 	std::cout << "#########################################################################################\n\n";
 }
 
-bool GamePlay() {
+bool GamePlay(int Difficulty) {
 
-	int FirstCode = 4;
-	int SecondCode = 3;
-	int ThirdCode = 2;
+	int FirstCode = rand() % Difficulty;
+	int SecondCode = rand() % Difficulty;
+	int ThirdCode = rand() % Difficulty;
 
 	int CodeSum = FirstCode + SecondCode + ThirdCode;
 	int CodeProduct = FirstCode * SecondCode * ThirdCode;
@@ -51,11 +57,11 @@ bool GamePlay() {
 	PlayerGuessProduct = PlayerGuessA * PlayerGuessB * PlayerGuessC;
 
 	if (PlayerGuessSum == CodeSum && PlayerGuessProduct == CodeProduct) {
-		std::cout << "\nYou broke the server's successfully and accomplished your mission!";
+		std::cout << "\nYou broke the server's successfully and got all the top secret files now hurry and get out of there!!";
 		return true;
 	}
 	else {
-		std::cout << "\nYOU DIED!!\n";
+		std::cout << "\nYou entered the wrong code and set off the alarms, your sacrifice will be remembered!\n";
 		return false;
 	}
 }
